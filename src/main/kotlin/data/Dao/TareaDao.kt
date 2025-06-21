@@ -13,7 +13,7 @@ class TareaDao(private val datasource: DataSource) : ITareaDao{
                             titulo VARCHAR(100),
                             descripcion VARCHAR(5OO),
                             fecha_limite VARCHAR(100),
-                            estado VARCHAR(100)
+                            estado VARCHAR(100);
         """.trimIndent()
 
         datasource.connection.use{conn ->
@@ -24,7 +24,7 @@ class TareaDao(private val datasource: DataSource) : ITareaDao{
 
     override fun consultarTarea(): Tarea? {
         var tarea: Tarea? = null
-        val consulta = "SELECT * FROM Tarea"
+        val consulta = "SELECT * FROM Tarea;"
         datasource.connection.use {conn ->
             val stmt = conn.createStatement()
            val rs = stmt.executeQuery(consulta)
@@ -44,7 +44,7 @@ class TareaDao(private val datasource: DataSource) : ITareaDao{
     override fun aniadirTarea(fechaInicio: String, titulo: String, descripcion: String, fechaLimite: String, estado: Estado): Boolean {
         val consulta = """
                     INSERT INTO Tarea (id, titulo, descripcion, fecha_limite, inicio_tarea, estado)
-                    VALUES (?, ?, ?, ?, ?, ?)
+                    VALUES (?, ?, ?, ?, ?, ?);
         """.trimIndent()
         datasource.connection.use {conn ->
             val stmt = conn.prepareStatement(consulta)
@@ -57,13 +57,30 @@ class TareaDao(private val datasource: DataSource) : ITareaDao{
         }
     }
 
-    override fun eliminarTarea(): Boolean {
-        TODO("Not yet implemented")
+    override fun eliminarTarea(id: String): Boolean {
+        val consulta = """
+                DELETE FROM Tarea
+                WHERE id = ?;
+        """.trimIndent()
+        datasource.connection.use {conn ->
+            val stmt = conn.prepareStatement(consulta)
+            stmt.setString(1, id)
+            return stmt.executeUpdate() != 0
+        }
     }
 
-    override fun cambiarEstadoTarea(estado: Estado): Boolean {
-        TODO("Not yet implemented")
+    override fun cambiarEstadoTarea(id: String, estado: Estado): Boolean {
+        val consulta = """
+            UPDATE Tarea 
+             SET estado = ?
+             WHERE id = ?;
+        """.trimIndent()
+        datasource.connection.use {conn ->
+            val stmt = conn.prepareStatement(consulta)
+            stmt.setString(1, estado.name)
+            stmt.setString(2, id)
+            return stmt.executeUpdate() != 0
+        }
     }
-
 
 }

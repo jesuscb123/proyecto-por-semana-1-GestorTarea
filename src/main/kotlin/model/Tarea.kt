@@ -2,27 +2,13 @@ package proyectoPorSemanaKotlin.dam.model
 
 import java.time.LocalDateTime
 
-class Tarea(val titulo: String,
+data class Tarea(val fechaIncio: String,
+            val titulo: String,
             val descripcion: String,
-            val fechaLimite: String) {
+            val fechaLimite: String,
+            val estado: Estado) {
 
-    var fechaInicio = LocalDateTime.now().toString()
-
-    var estado: Estado = Estado.PENDIENTE
-        private set
-
-    constructor(inicioTarea: String,
-                titulo: String,
-                descripcion: String,
-                fechaLimite: String,
-                estado: Estado) : this (titulo, descripcion, fechaLimite){
-                    this.fechaInicio = inicioTarea
-                    this.estado = estado
-                }
-
-    fun cambiarEstado(estado: Estado){
-        this.estado = estado
+    override fun toString(): String {
+        return "fecha inicio: $fechaIncio - titulo: $titulo, descripción: $descripcion, fecha límite: $fechaLimite, estado: $estado"
     }
-
-
 }
