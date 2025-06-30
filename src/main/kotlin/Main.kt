@@ -16,7 +16,7 @@ fun main() {
     }else{
         val tareaDao = TareaDao(dataSource)
         val tareaService = TareaService(tareaDao)
-        val gestorTareas = GestorTareas(tareaService, consola)
+        val gestorTareas = GestorTareas(tareaService, consola).iniciar()
     }
 
 }

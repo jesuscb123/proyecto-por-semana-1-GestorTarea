@@ -8,12 +8,13 @@ class TareaDao(private val datasource: DataSource) : ITareaDao{
 
     init{
         val consulta = """
-                        CREATE TABLE IF NOT EXISTS Tarea (
-                            id INT PRIMARY KEY,
-                            titulo VARCHAR(100),
-                            descripcion VARCHAR(5OO),
-                            fecha_limite VARCHAR(100),
-                            estado VARCHAR(100);
+            CREATE TABLE IF NOT EXISTS Tarea (
+                fecha_inicio INT PRIMARY KEY,
+                titulo VARCHAR(100),
+                descripcion VARCHAR(500),
+                fecha_limite VARCHAR(100),
+                estado VARCHAR(100)
+            );
         """.trimIndent()
 
         datasource.connection.use{conn ->
@@ -43,8 +44,8 @@ class TareaDao(private val datasource: DataSource) : ITareaDao{
 
     override fun aniadirTarea(fechaInicio: String, titulo: String, descripcion: String, fechaLimite: String, estado: Estado): Boolean {
         val consulta = """
-                    INSERT INTO Tarea (id, titulo, descripcion, fecha_limite, inicio_tarea, estado)
-                    VALUES (?, ?, ?, ?, ?, ?);
+                    INSERT INTO Tarea (fecha_inicio, titulo, descripcion, fecha_limite, estado)
+                    VALUES (?, ?, ?, ?, ?);
         """.trimIndent()
         datasource.connection.use {conn ->
             val stmt = conn.prepareStatement(consulta)
