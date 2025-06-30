@@ -30,7 +30,7 @@ class TareaDao(private val datasource: DataSource) : ITareaDao{
            val rs = stmt.executeQuery(consulta)
             while(rs.next()){
                 tarea = Tarea(
-                    inicioTarea =  rs.getString("id"),
+                    fechaIncio =  rs.getString("id"),
                     titulo = rs.getString("titulo"),
                     descripcion = rs.getString("descripcion"),
                     fechaLimite = rs.getString("fecha_limite"),

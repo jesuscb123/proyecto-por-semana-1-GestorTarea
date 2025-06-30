@@ -4,7 +4,6 @@ import proyectoPorSemanaKotlin.dam.data.Dao.ITareaDao
 import proyectoPorSemanaKotlin.dam.model.Estado
 import proyectoPorSemanaKotlin.dam.model.Tarea
 import proyectoPorSemanaKotlin.dam.utils.Fecha
-import java.time.LocalTime
 
 class TareaService (val tareaRepo: ITareaDao) : ITareaService{
     override fun consultarTarea(): Tarea? {
@@ -24,12 +23,15 @@ class TareaService (val tareaRepo: ITareaDao) : ITareaService{
     }
 
     override fun eliminarTarea(id: String): Boolean {
-        TODO("Not yet implemented")
+        require(id.isNotEmpty()) {"El id no puede estar vacío."}
+        return tareaRepo.eliminarTarea(id)
     }
 
-    override fun cambiarEstadoTarea(id: String, estado: Estado): Boolean {
-        TODO("Not yet implemented")
+    override fun cambiarEstadoTarea(id: String, estado: String): Boolean {
+        require(id.isNotEmpty()) {"El id no puede estar vacío."}
+        val estadoCorrecto = Estado.desdeString(estado)
+        require(estadoCorrecto != null) {"El estado debe ser correcto."}
+        return tareaRepo.cambiarEstadoTarea(id, estadoCorrecto)
     }
-
 
 }
