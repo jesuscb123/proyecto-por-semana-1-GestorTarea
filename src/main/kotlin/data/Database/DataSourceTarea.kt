@@ -6,7 +6,7 @@ import javax.sql.DataSource
 
 class DataSourceTarea(){
     companion object{
-        private const val JDBC_URL = "jdbc:h2:file:./data/tienda;AUTO_SERVER=TRUE"
+        private const val JDBC_URL = "jdbc:h2:file:./data/Tareas;AUTO_SERVER=TRUE"
         private const val USER = "sa"
         private const val PASSWORD = ""
         private const val DRIVER = "org.h2.Driver"

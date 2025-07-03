@@ -34,7 +34,7 @@ class GestorTareas (val tareaService: ITareaService, val consola: IEntradaSalida
     fun eleccion(opcionUsuario: Int): Boolean {
         when (opcionUsuario){
             1 -> aniadirTarea()
-            2 -> tareaService.consultarTarea()
+            2 -> consultarTareas()
             3 -> eliminarTarea()
             4 -> cambiarEstado()
             5 -> return true
@@ -58,6 +58,11 @@ class GestorTareas (val tareaService: ITareaService, val consola: IEntradaSalida
         val id = consola.pedir("Introduce el id de la tarea")
         val estado = consola.pedir("Introduce el nuevo estado de la tarea.")
         return tareaService.cambiarEstadoTarea(id, estado)
+    }
+
+    fun consultarTareas(){
+       val tarea = tareaService.consultarTarea()
+        if (tarea != null) consola.mostrar(tarea.toString()) else consola.mostrarError("No se ha encontrado ninguna tarea.")
     }
 
 }

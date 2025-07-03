@@ -9,7 +9,7 @@ class TareaDao(private val datasource: DataSource) : ITareaDao{
     init{
         val consulta = """
             CREATE TABLE IF NOT EXISTS Tarea (
-                fecha_inicio INT PRIMARY KEY,
+                fecha_inicio VARCHAR(100) PRIMARY KEY,
                 titulo VARCHAR(100),
                 descripcion VARCHAR(500),
                 fecha_limite VARCHAR(100),
@@ -31,7 +31,7 @@ class TareaDao(private val datasource: DataSource) : ITareaDao{
            val rs = stmt.executeQuery(consulta)
             while(rs.next()){
                 tarea = Tarea(
-                    fechaIncio =  rs.getString("id"),
+                    fechaIncio =  rs.getString("fecha_inicio"),
                     titulo = rs.getString("titulo"),
                     descripcion = rs.getString("descripcion"),
                     fechaLimite = rs.getString("fecha_limite"),
@@ -74,7 +74,7 @@ class TareaDao(private val datasource: DataSource) : ITareaDao{
         val consulta = """
             UPDATE Tarea 
              SET estado = ?
-             WHERE id = ?;
+             WHERE fecha_inicio = ?;
         """.trimIndent()
         datasource.connection.use {conn ->
             val stmt = conn.prepareStatement(consulta)
