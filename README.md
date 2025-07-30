@@ -10,3 +10,6 @@ Arquitectura por capas.
   - Eliminar tarea
   - Cambiar estado de una tarea
   - Consultar tareas.
+
+## Estructura del proyecto
+<img width="456" height="331" alt="image" src="https://github.com/user-attachments/assets/dd0bb873-98f2-4eb9-a312-0a4e07871940" />
