@@ -13,3 +13,7 @@ Arquitectura por capas.
 
 ## Estructura del proyecto
 <img width="456" height="331" alt="image" src="https://github.com/user-attachments/assets/dd0bb873-98f2-4eb9-a312-0a4e07871940" />
+## Base de datos h2 que almacena datos de forma permanente
+https://github.com/jesuscb123/proyecto-por-semana-1-GestorTarea/blob/9c2dca462ab4e14f3cd2ff643290be2425fdde3f/src/main/kotlin/data/Database/DataSourceTarea.kt#L7-L31
+
+
